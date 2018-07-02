@@ -2,22 +2,23 @@
    hey/server.js
    ====================================================
    CREATED: 2018-07-01
+   UPDATED: 2018-07-01
+   VERSION: v0.0.1
    AUTHOR: wlharvey4
-   MODIFIED: 2018-07-01
-   VERSION: 0.0.1
    ABOUT: Main http server file
    NOTES:
    CHANGE-LOG:
-   0.0.1: Initial commit
+   v0.0.1: initial commit
    ----------------------------------------------------
  */
 
-const http = require('http');
-const app = require('./app');
+const http   = require('http');
 const bunyan = require('bunyan');
+const app    = require('./app');
 
 const serverLogger = bunyan.createLogger({name: 'hey-server'});
-serverLogger.info("Starting...");
+serverLogger.info("Starting server...");
+serverLogger.info(`Server will be using port ${process.env.PORT}...`);
 
 const PORT = process.env.PORT;
 

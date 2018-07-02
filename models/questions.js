@@ -13,12 +13,12 @@
  */
 
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const User = require('./users.js');
 
 const questionsSchema = new Schema({
-  _id: Schema.types.ObjectID,
+  _id: Schema.Types.ObjectId,
   topic: {
     type: String,
     required: true
@@ -36,9 +36,8 @@ const questionsSchema = new Schema({
       answers: [
 	{
 	  by: {
-	    type: Schema.types.ObjectID,
+	    type: Schema.Types.ObjectId,
 	    ref: 'User'
-	    required: true,
 	  },
 	  answer: {
 	    type: String,
@@ -63,25 +62,25 @@ const questionsSchema = new Schema({
   accessedBy: [
     {
       name: {
-	type: Schema.types.ObjectID,
+	type: Schema.Types.ObjectId,
 	ref: 'User',
 	required: true
       },
-      on: {
+      date: {
 	type: Date,
 	default: Date.now
       },
     },
   ],
   createdBy: {
-    type: Schema.types.ObjectID,
+    type: Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
   comments: [
     {
       by: {
-	Schema.types.ObjectID,
+	type: Schema.Types.ObjectId,
 	ref: 'User',
       },
       comment: String,
@@ -90,4 +89,4 @@ const questionsSchema = new Schema({
   ],
 });
 
-module.exports = model('Question', questionsSchema);
+module.exports = mongoose.model('Question', questionsSchema);

@@ -14,9 +14,18 @@
 
 const express = require('express');
 const router = express.Router();
+const usersController = require('../controllers/users');
 
-router.get('/', (req, res) => {
+router.get('/', usersController.getAllUsers, (req, res, next) => {
   res.status(200).json({message: 'heyteam users home'});
+});
+
+router.post('/:newUser', usersController.addNewUser, (req, res, next) => {
+  res
+    .status(201)
+    .json({
+      message: `new user: ${res.locals.newUser}`
+    });
 });
 
 module.exports = router;

@@ -14,9 +14,16 @@
 
 const express = require('express');
 const router = express.Router();
+const questionsController = require('../controllers/questions');
 
-router.get('/', (req, res, next) => {
-  res.status(200).json({ message: 'heyteam questions home' });
+router.get('/', questionsController.getAllQuestions, (req, res, next) => {
+  res.status(200).json({ message: 'get all questions' });
+});
+
+router.post('/', questionsController.addNewQuestions, (req, res, next) => {
+  res
+    .status(201)
+    .json({ message: 'add new questions' })
 });
 
 module.exports = router;

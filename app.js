@@ -33,7 +33,7 @@ app.use(
 const user   = process.env.MONGODB_USER;
 const pw     = process.env.MONGODB_PW;
 const host   = process.env.MONGODB_HOST;
-const dbName = process.env.MONGODB_DB;
+const dbName = process.env.MONGODB_DBNAME;
 const uri    = `mongodb+srv://${user}:${pw}@${host}.mongodb.net/test?retryWrites=true`;
 const options= { dbName };
 
@@ -49,5 +49,19 @@ app.get('/', (req, res, next) => {
 
 app.use('/users',     usersRouter);
 app.use('/questions', questionsRouter);
+app.use((req, res, next) => {
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+app.use((err, req, res, next) => {
+  appLogger.warn('This is the error handling route');
+  appLogger.error(err);
+  res.status(err.status || 500);
+  res.json({
+    error: { message: err.message }
+  });
+});
 
 module.exports = app;

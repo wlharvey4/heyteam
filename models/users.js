@@ -13,10 +13,10 @@
  */
 
 const mongoose = require('mongoose');
-const { Schema, model } = mongoose;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  _id: Schema.types.ObjectID,
+  _id: Schema.Types.ObjectId,
   name: {
     type: String,
     required: true,
@@ -38,4 +38,4 @@ const userSchema = new Schema({
   }
 });
 
-module.exports = model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

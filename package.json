@@ -2,7 +2,7 @@
   "name": "HeyTeamApp",
   "version": "0.0.1",
   "description": "HeyTeam Serverside Application",
-  "main": "server.js",
+  "main": "src/server.js",
   "author": "wlharvey4",
   "license": "MIT",
   "private": true,

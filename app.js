@@ -3,7 +3,7 @@
    ====================================================
    CREATED: 2018-07-01
    UPDATED: 2018-07-05
-   VERSION: v0.1.0
+   VERSION: v0.1.1
    AUTHOR: wlharvey4
    ABOUT: Express application file
    NOTES:
@@ -13,6 +13,9 @@
    ....................................................
    v0.1.0 2018-07-05: installed express, router, and
    mongodb/mongoose with cors
+   ....................................................
+   v0.1.1 2018-07-05T08:53:00: add Mongoose option database
+   correctly; tests good for new user with defaults
    ----------------------------------------------------
  */
 
@@ -64,12 +67,13 @@ const pw     = process.env.MONGODB_PW;
 const host   = process.env.MONGODB_HOST;
 const dbName = process.env.MONGODB_DBNAME;
 const uri    = `mongodb+srv://${user}:${pw}@${host}.mongodb.net/test?retryWrites=true`;
-const options= { dbName };
+const options= { dbName: "heyteam" };
 
 mongoose.connect(uri, options)
  	.then(
  	  () => appLogger.info('connected to MongoDB Atlas cluster'),
  	  err => appLogger.error(err)
  	);
+
 
 module.exports = app;
